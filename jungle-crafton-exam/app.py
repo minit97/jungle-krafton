@@ -10,7 +10,7 @@ import sys
 
 app = Flask(__name__)
 
-client = MongoClient('localhost', 27017)
+client = MongoClient('mongodb://test:test@localhost', 27017)
 db = client.dbjungle
 
 class CustomJSONEncoder(json.JSONEncoder):
@@ -48,7 +48,6 @@ def show_movies_list():
 
     return jsonify({'result': 'success', 'movies_list': movies})
 
-# 휴지통 보기
 @app.route('/api/list/trash', methods=['GET'])
 def show_movies_list_trash():
     sortMode = request.args.get('sortMode', 'likes')
@@ -109,4 +108,4 @@ def delete_movie():
 
 if __name__ == '__main__':
     print(sys.executable)
-    app.run('0.0.0.0', port=5001, debug=True)
+    app.run('0.0.0.0', port=5000, debug=True)
